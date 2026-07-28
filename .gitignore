@@ -1,0 +1,6 @@
+experiments/
+invalid-experiments/
+out.csv
+out_nohist.csv
+**/.env
+**/xdebug/
