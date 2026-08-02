@@ -2,16 +2,24 @@ FROM bitnamilegacy/drupal:8.6.15
 
 COPY docker-php-ext-enable /usr/bin/
 
-ENV PHP_INI_DIR=/opt/bitnami/php/etc/
+ENV PHP_INI_DIR=/opt/bitnami/php/etc
 
-RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list \
-    && sed -i 's|security.debian.org|archive.debian.org/debian-security/|g' /etc/apt/sources.list \
-    && sed -i 's|httpredir.debian.org/debian|archive.debian.org/debian|g' /etc/apt/sources.list \
-    && apt update && apt install -y autoconf gcc make \
+RUN printf '%s\n' \
+    'deb [trusted=yes] http://archive.debian.org/debian stretch main' \
+    'deb [trusted=yes] http://archive.debian.org/debian-security stretch/updates main' \
+    > /etc/apt/sources.list \
+    && printf '%s\n' \
+       'Acquire::Check-Valid-Until "false";' \
+       'Acquire::AllowInsecureRepositories "true";' \
+       > /etc/apt/apt.conf.d/99archive \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends autoconf build-essential \
     && pecl install xdebug-2.5.5 \
-    #&& chmod +x /usr/bin/docker-php-ext-enable \
-    #&& docker-php-ext-enable xdebug \
-    && echo 'zend_extension=/opt/bitnami/php/lib/php/extensions/xdebug.so\nauto_prepend_file = "/opt/xdebug.php"' > $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini
-    #&& echo 'auto_prepend_file = "/opt/xdebug.php"\nxdebug.mode = "coverage"' >> $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini
+    && mkdir -p "$PHP_INI_DIR/conf.d" \
+    && printf '%s\n' \
+       'zend_extension=/opt/bitnami/php/lib/php/extensions/xdebug.so' \
+       'auto_prepend_file = "/opt/xdebug.php"' \
+       > "$PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini" \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY xdebug.php /opt/xdebug.php
