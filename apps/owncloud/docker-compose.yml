@@ -25,7 +25,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
       - OWNCLOUD_HOST=web
   mariadb:
-    image: bitnami/mariadb:10.3 
+    image: bitnamilegacy/mariadb:10.3 
     restart: unless-stopped
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.

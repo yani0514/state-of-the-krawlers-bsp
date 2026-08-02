@@ -1,4 +1,4 @@
-FROM bitnami/owncloud-archived:10.10.0
+FROM bitnamilegacy/owncloud-archived:10.10.0
 
 COPY docker-php-ext-enable /usr/bin/
 

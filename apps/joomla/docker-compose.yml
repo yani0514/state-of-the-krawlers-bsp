@@ -23,7 +23,7 @@ services:
       JOOMLA_DATABASE_PASSWORD: dbpassword
       JOOMLA_DATABASE_NAME: dbname
   mariadb:
-    image: bitnami/mariadb:10.3 
+    image: bitnamilegacy/mariadb:10.3 
     restart: 'always'
     environment:
       ALLOW_EMPTY_PASSWORD: 'yes'

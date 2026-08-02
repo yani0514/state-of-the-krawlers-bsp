@@ -1,4 +1,4 @@
-FROM bitnami/drupal:8.6.15
+FROM bitnamilegacy/drupal:8.6.15
 
 COPY docker-php-ext-enable /usr/bin/
 

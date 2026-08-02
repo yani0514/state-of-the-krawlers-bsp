@@ -1,4 +1,4 @@
-FROM bitnami/prestashop:1.7.5-1
+FROM bitnamilegacy/prestashop-archived:1.7.5-1
 
 COPY docker-php-ext-enable /usr/bin/
 

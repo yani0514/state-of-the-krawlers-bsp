@@ -1,4 +1,4 @@
-FROM bitnami/joomla:3.9.6
+FROM bitnamilegacy/joomla-archived:3.9.6
 
 COPY docker-php-ext-enable /usr/bin/
 

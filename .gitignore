@@ -4,3 +4,4 @@ out.csv
 out_nohist.csv
 **/.env
 **/xdebug/
+hotcrp_*_3runs.csv
