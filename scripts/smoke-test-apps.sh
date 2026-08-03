@@ -2,6 +2,22 @@
 
 set -u
 
+PASSED=0
+FAILED=0
+
+cleanup() {
+    echo
+    echo "======================================"
+    echo "Smoke test interrupted."
+    echo "Stopping..."
+    echo "======================================"
+
+    pkill -f arachnarium >/dev/null 2>&1 || true
+    exit 130
+}
+
+trap cleanup SIGINT SIGTERM
+
 run_test() {
     local app="$1"
     local url="$2"
@@ -13,20 +29,22 @@ run_test() {
     echo "=================================================="
 
     arachnarium run \
-      crawlers/crawljax \
-      "apps/$app" \
-      -t 1 \
-      -a general_paths \
-      --nav bfs \
-      --app "$app" \
-      --url "$url"
+        crawlers/crawljax \
+        "apps/$app" \
+        -t 1 \
+        -a general_paths \
+        --nav bfs \
+        --app "$app" \
+        --url "$url"
 
-    status=$?
+    local status=$?
 
     if [ "$status" -eq 0 ]; then
-        echo "COMMAND FINISHED: $app"
+        echo "PASS: $app"
+        ((PASSED++))
     else
-        echo "COMMAND FAILED: $app, exit code $status"
+        echo "FAIL: $app (exit code $status)"
+        ((FAILED++))
     fi
 }
 
@@ -40,3 +58,16 @@ run_test scarf       "http://web/"
 run_test vanilla     "http://web/index.php"
 run_test wackopicko  "http://web/"
 run_test wordpress   "http://web/"
+
+echo
+echo "======================================"
+echo "Smoke test finished"
+echo "======================================"
+echo "Passed: $PASSED"
+echo "Failed: $FAILED"
+
+if [ "$FAILED" -eq 0 ]; then
+    echo "All applications started successfully."
+else
+    echo "Some applications failed."
+fi
