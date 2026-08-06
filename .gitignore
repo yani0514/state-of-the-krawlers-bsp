@@ -1,7 +1,9 @@
+**/.env
+**/xdebug/
+campaign-logs/
 experiments/
+hotcrp_*_3runs.csv
 invalid-experiments/
 out.csv
 out_nohist.csv
-**/.env
-**/xdebug/
-hotcrp_*_3runs.csv
+results/
