@@ -6,4 +6,6 @@ hotcrp_*_3runs.csv
 invalid-experiments/
 out.csv
 out_nohist.csv
+reports/
 results/
+slurm-logs/
