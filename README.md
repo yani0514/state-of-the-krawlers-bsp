@@ -96,7 +96,7 @@ Example:
 
 ---
 
-## run_campaign.sh
+## run_experiments.sh
 
 Executes the complete experiment campaign.
 
@@ -124,13 +124,13 @@ The script can safely resume interrupted campaigns because already archived conf
 Example:
 
 ```bash
-MINUTES=30 ./scripts/run_campaign.sh
+MINUTES=30 ./scripts/run_experiments.sh
 ```
 
 For testing:
 
 ```bash
-MINUTES=1 ./scripts/run_campaign.sh
+MINUTES=1 ./scripts/run_experiments.sh
 ```
 
 ---
