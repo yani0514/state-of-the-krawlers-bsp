@@ -98,7 +98,7 @@ Example:
 
 ## run_experiments.sh
 
-Executes the complete experiment campaign.
+Executes the complete experiment pipeline.
 
 For every configured application the script executes:
 
@@ -246,4 +246,4 @@ The automation pipeline is designed for long-running experiment campaigns.
 
 If execution is interrupted, completed configurations remain archived under `results/`.
 
-When the campaign is started again, configurations that have already been archived are detected automatically and skipped, allowing the remaining experiments to continue without repeating completed work.
+When the execution is started again, configurations that have already been archived are detected automatically and skipped, allowing the remaining experiments to continue without repeating completed work.
